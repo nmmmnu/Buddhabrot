@@ -4,7 +4,7 @@ MYCC	= gcc
 CC	= $(MYCC) -c -Wall
 #-O9
 LINK	= $(MYCC) -o
-LIBS	=
+LIBS	= -lm
 #-lquadmath
 
 TARGETS = buddhabrot
@@ -21,4 +21,4 @@ buddhabrot.o:	buddhabrot.c
 	$(CC)		buddhabrot.c
 
 buddhabrot:			buddhabrot.o
-	$(LINK) buddhabrot	buddhabrot.o
+	$(LINK) buddhabrot	buddhabrot.o	$(LIBS)
