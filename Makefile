@@ -1,6 +1,6 @@
-MYCC	= g++
+#MYCC	= g++
 #MYCC	= clang
-#MYCC	= gcc
+MYCC	= gcc
 
 CC	= $(MYCC) -c -Wall
 #-O9

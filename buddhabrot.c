@@ -51,7 +51,7 @@ inline static uint bb_m2scr(const Budabrot *bb, float a){
 inline static uint bb_m2scr2(const Budabrot *bb, float a){
 	uint result = bb_m2scr(bb, a);
 
-	return (result > bb->size2) ? bb->size - result : result;
+	return (result >= bb->size2) ? bb->size - result : result;
 }
 
 inline static uint bb_getpx(const Budabrot *bb, uint x, uint y){
@@ -68,7 +68,7 @@ static void bb_putpx(Budabrot *bb, uint index){
 	uint x = bb_m2scr(bb, bb->points[index].x);
 	uint y = bb_m2scr2(bb, bb->points[index].y);
 
-	if (y > bb->size2)
+	if (y >= bb->size2)
 		return;
 
 	uint pos = y * bb->size + x;

@@ -1,8 +1,8 @@
 #ifndef BUDDHABROT_PARAMS_H
 #define BUDDHABROT_PARAMS_H
 
-#define ITERATIONS		2000
-#define HALF_SCREEN_SIZE	(760 / 2)
-#define POINT_STEP		0.01
+#define ITERATIONS		10000
+#define HALF_SCREEN_SIZE	(700 / 2)
+#define POINT_STEP		0.001
 
 #endif
