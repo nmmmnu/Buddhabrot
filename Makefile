@@ -1,12 +1,11 @@
-#MYCC	= g++
-#MYCC	= clang
-MYCC	= gcc
+MYCC	= g++
 
 CC	= $(MYCC) -c -Wall
 #-O9
 LINK	= $(MYCC) -o
 LIBS	= -lm
 #-lquadmath
+
 
 TARGETS = buddhabrot
 
@@ -18,12 +17,29 @@ clean:
 	rm -f *.o $(TARGETS)
 
 
-buddhabrot.o:	buddhabrot.c buddhabrot_params.h mandelbrot.h
-	$(CC)		buddhabrot.c
+buddhabrot:			main.o BuddhaBrot.o CalcMandelbrot.o Bitmap.o RGBManipulator.o ColorLinear.o ColorSQRT.o
+	$(LINK) buddhabrot	main.o BuddhaBrot.o CalcMandelbrot.o Bitmap.o RGBManipulator.o ColorLinear.o ColorSQRT.o
 
-mandelbrot.o:	mandelbrot.c mandelbrot.h
-	$(CC)		mandelbrot.c
+main.o: main.cc	BuddhaBrot.h CalcMandelbrot.h ColorLinear.h defs.h
+	$(CC) main.cc
 
 
-buddhabrot:			buddhabrot.o mandelbrot.o
-	$(LINK) buddhabrot	buddhabrot.o mandelbrot.o	$(LIBS)
+BuddhaBrot.o: BuddhaBrot.cc BuddhaBrot.h ICalcFractal.h IBitmap.h Bitmap.h RGBManipulator.h IColor.h defs.h
+	$(CC) BuddhaBrot.cc
+
+CalcMandelbrot.o: CalcMandelbrot.cc CalcMandelbrot.h ICalcFractal.h defs.h
+	$(CC) CalcMandelbrot.cc
+
+Bitmap.o: Bitmap.cc Bitmap.h IBitmap.h defs.h
+	$(CC) Bitmap.cc
+
+RGBManipulator.o: RGBManipulator.cc RGBManipulator.h defs.h
+	$(CC) RGBManipulator.cc
+	
+ColorLinear.o: ColorLinear.cc ColorLinear.h IColor.h RGBManipulator.h defs.h
+	$(CC) ColorLinear.cc
+
+ColorSQRT.o: ColorSQRT.cc ColorSQRT.h IColor.h RGBManipulator.h defs.h
+	$(CC) ColorSQRT.cc
+
+
