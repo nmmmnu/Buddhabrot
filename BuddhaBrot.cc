@@ -58,7 +58,7 @@ bool BuddhaBrot::_calculateEscape(float xf, float yf){
 		const Point p = _points[i];
 
 		// skip point (0, 0)
-		if (p.x == 0 && p.y == 0)
+		if (p.x > - _step && p.x < + _step && p.y > - _step && p.y < + _step)
 			continue;
 
 		_bitmap->putVPixel(p.x, p.y, it);

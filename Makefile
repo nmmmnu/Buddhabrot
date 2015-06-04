@@ -1,7 +1,7 @@
 MYCC	= g++
+OPTIM	= -O9
 
-CC	= $(MYCC) -c -Wall
-#-O9
+CC	= $(MYCC) -c -Wall $(OPTIM)
 LINK	= $(MYCC) -o
 LIBS	= -lm
 #-lquadmath

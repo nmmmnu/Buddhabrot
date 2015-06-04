@@ -5,7 +5,7 @@
 #include "ColorLinear.h"
 #include "Bitmap.h"
 
-#define ITERATIONS	5000
+#define ITERATIONS	2000
 #define SCREEN_SIZE	760
 #define POINT_STEP	0.001
 
