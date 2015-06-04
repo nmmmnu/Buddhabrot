@@ -1,7 +1,31 @@
 #include "CalcMandelbrot.h"
 
+class CalcMandelbrot : public ICalcFractal{
+private:
+	static const float M_ESCAPE2 = 4;	// 2 ^ 2
+
+public:
+	CalcMandelbrot(bool speedup = true){
+		this->_speedup = speedup;
+	}
+
+	virtual myint Z(float x, float y, myint iterations, Point *points = NULL);
+
+private:
+	bool _speedupZ(float x, float y);
+
+private:
+	bool _speedup;				// Whatever to use bulb checking or not
+};
+
+ICalcFractal *FCalcMandelbrot(bool speedup){
+	return new CalcMandelbrot();
+}
+
+// ==================
+
 myint CalcMandelbrot::Z(float x, float y, myint iterations, Point *points){
-	if (_testZ(x, y))
+	if (_speedupZ(x, y))
 		return iterations;
 
 	float zr = 0;
@@ -20,7 +44,7 @@ myint CalcMandelbrot::Z(float x, float y, myint iterations, Point *points){
 			points[i].x = zr;
 			points[i].y = zi;
 		}
-		
+
 		// calc next Z
 
 		// z = z*z + c
@@ -32,7 +56,7 @@ myint CalcMandelbrot::Z(float x, float y, myint iterations, Point *points){
 	return i;
 }
 
-bool CalcMandelbrot::_testZ(float x, float y){
+bool CalcMandelbrot::_speedupZ(float x, float y){
 	if (_speedup == false)
 		return false;
 

@@ -3,24 +3,23 @@
 #include <string.h>	// memset
 
 #include "BuddhaBrot.h"
-#include "Bitmap.h"
-#include "RGBManipulator.h"
 
-BuddhaBrot::BuddhaBrot(ICalcFractal *calc, IColor *color, myint iterations, myint size, float step){
+BuddhaBrot::BuddhaBrot(ICalcFractal *calc, IBitmap *bitmap, IColor *color, myint iterations, float step){
 	this->_calc		= calc;
+	this->_bitmap		= bitmap;
 	this->_color		= color;
 
 	this->_iterations	= iterations;
 	this->_step		= step;
-	
-	this->_bitmap		= new Bitmap(size, M_WIDTH, M_CORRECTION);
-	
+
 	_pointsAlloc();
+
+	this->_bitmap->setVSize(M_WIDTH, M_CORRECTION);
 }
 
 BuddhaBrot::~BuddhaBrot(){
 	delete(this->_calc);
-	
+
 	delete(this->_bitmap);
 
 	free(this->_points);
@@ -36,7 +35,7 @@ void BuddhaBrot::generate(){
 
 		_printProgress(yf, 0.0);
 	}
-	
+
 	_printProgress(100.0, 100.0, true);
 }
 
@@ -52,16 +51,16 @@ bool BuddhaBrot::_calculateEscape(float xf, float yf){
 	// then point is escaped outside the circle
 	if (it == 0)
 		return true;
-		
+
 	// begin plot points
 	uint i;
 	for (i = 0; i < it; ++i){
 		const Point p = _points[i];
-		
+
 		// skip point (0, 0)
 		if (p.x == 0 && p.y == 0)
 			continue;
-		
+
 		_bitmap->putVPixel(p.x, p.y, it);
 	}
 
@@ -72,7 +71,7 @@ void BuddhaBrot::output() const{
 	static FILE *F = stdout;
 
 	RGB rgb2;
-	
+
 	myint size = _bitmap->getSize();
 
 	fprintf(F, "P3\n");
@@ -89,13 +88,13 @@ void BuddhaBrot::output() const{
 
 		printf("\n");
 	}
-	
+
 	printf("hitcount - %u\n", _bitmap->getMaxHitcount());
 }
 
 inline void BuddhaBrot::_outputRGB(RGB *rgb) const{
 	static FILE *F = stdout;
-	
+
 	fprintf(F, "%5u %5u %5u ", rgb->r, rgb->g, rgb->b);
 }
 

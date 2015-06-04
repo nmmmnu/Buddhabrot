@@ -13,12 +13,6 @@ struct Point{
 	float	y;
 };
 
-struct RGB{
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
-};
-
 //#define mylog(...)
 #define mylog(...)	fprintf (stderr, __VA_ARGS__)
 

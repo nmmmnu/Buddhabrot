@@ -9,7 +9,7 @@
 
 class BuddhaBrot{
 public:
-	BuddhaBrot(ICalcFractal *calc, IColor *color, myint iterations, myint size, float step);
+	BuddhaBrot(ICalcFractal *calc, IBitmap *bitmap, IColor *color, myint iterations, float step);
 	virtual ~BuddhaBrot();
 
 	void generate();
@@ -17,11 +17,11 @@ public:
 
 private:
 	void _pointsAlloc();
-	
+
 	bool _calculateEscape(float xf, float yf);
-	
+
 	void _printProgress(float p, float total, bool nl = false);
-	
+
 	inline void _outputRGB(RGB *rgb) const;
 
 protected:
@@ -32,7 +32,7 @@ protected:
 private:
 	ICalcFractal	*_calc;
 	IColor		*_color;
-	
+
 	myint		_iterations;
 	float		_step;
 

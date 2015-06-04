@@ -3,25 +3,27 @@
 #include "BuddhaBrot.h"
 #include "CalcMandelbrot.h"
 #include "ColorLinear.h"
+#include "Bitmap.h"
 
-#define ITERATIONS	1000
-#define SCREEN_SIZE	500
-#define POINT_STEP	0.01
+#define ITERATIONS	5000
+#define SCREEN_SIZE	760
+#define POINT_STEP	0.001
 
-BuddhaBrot *factory(){
-	ICalcFractal *calc	= (ICalcFractal *)	new CalcMandelbrot();
-	IColor *color		= (IColor *)		new ColorLinear();
+static BuddhaBrot *factory(){
+	ICalcFractal *calc	= FCalcMandelbrot();
+	IBitmap *bitmap		= FBitmap(SCREEN_SIZE);
+	IColor *color		= FColorLinear();
 
-	return new BuddhaBrot(calc, color, ITERATIONS, SCREEN_SIZE, POINT_STEP);
+	return new BuddhaBrot(calc, bitmap, color, ITERATIONS, POINT_STEP);
 }
 
-int main(){	
+int main(){
 	BuddhaBrot *bb = factory();
 
 	bb->generate();
 	bb->output();
 
 	delete(bb);
-	
+
 	return 0;
 }

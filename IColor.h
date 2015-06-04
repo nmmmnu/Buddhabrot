@@ -3,6 +3,8 @@
 
 #include "defs.h"
 
+#include "RGB.h"
+
 class IColor{
 public:
 	virtual ~IColor(){};
