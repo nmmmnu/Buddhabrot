@@ -3,6 +3,5 @@ buddhabrot
 *.o
 x
 x.c
-x.cc
 *.pgm
 *.png
